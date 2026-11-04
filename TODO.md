@@ -4,3 +4,4 @@
 - [ ] Make basic background with "places"
   - [ ] Could be all svgs?
 - [ ] Make character movement
+- [ ] Create hover popups
