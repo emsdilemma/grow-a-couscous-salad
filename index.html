@@ -4,8 +4,12 @@
 </head>
 <body>
     <div style="display:flex; justify-content: center; align-content: center;">
+        <div id="overlay" style="display: block; position: absolute; width: 500px; height: 500px; border: 1px solid black"></div>
         <canvas id="gameCanvas" width="500" height="500"></canvas>
     </div>
     <div id="debugBar"></div>
+    <script src="/functions/placePlaces.js"></script>
+    <script src="/functions/playerCollision.js"></script>
+    <script src="/functions/collidedWithStore.js"></script>
     <script src="index.js"></script>
 </body>
