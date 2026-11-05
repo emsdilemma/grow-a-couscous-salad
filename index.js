@@ -1,19 +1,20 @@
 const canvas = document.getElementById("gameCanvas")
 const ctx = canvas.getContext("2d")
-const debug = document.getElementById("debugBar")
+
+const debugBar = document.getElementById("debugBar")
 
 const player = {
     x: 0,
     y: 0,
-    width: 20,
-    speed: 6,
+    width: 25,
+    speed: 25,
     colour: "#ff0000",
     shape: "square",
 }
 const keys = {}
 
 function updateMovement(){
-    //debug.innerHTML = player.x + " " + player.y
+    debugBar.innerHTML = player.x + " " + player.y
 
     if (keys.w && player.y > 0) player.y -= player.speed
     if (keys.s && player.y < canvas.height - player.width) player.y += player.speed
@@ -34,11 +35,15 @@ function drawScreen(){
     ctx.fillRect(player.x, player.y, player.width, player.width)
 }
 
+function frameLoop(){
+    requestAnimationFrame(loop)
+}
+
 function loop(){
     updateMovement()
     drawScreen()
 
-    requestAnimationFrame(loop)
+    setTimeout(frameLoop, 100)
 }
 
 // input listeners
