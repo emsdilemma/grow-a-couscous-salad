@@ -14,7 +14,7 @@ const player = {
 const keys = {}
 
 function updateMovement(){
-    debugBar.innerHTML = player.x + " " + player.y
+    //debugBar.innerHTML = player.x + " " + player.y
 
     if (keys.w && player.y > 0) player.y -= player.speed
     if (keys.s && player.y < canvas.height - player.width) player.y += player.speed
