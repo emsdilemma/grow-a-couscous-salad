@@ -5,4 +5,14 @@
   ~~- [ ] Could be all svgs?~~
   - [x] Used randomly generated squares
 - [x] Make character movement
-- [ ] Create collision popups
+- [x] Create collision popups
+
+**06/11/2026**
+- [ ] Make shop functional
+  - [ ] Be able to buy seeds
+- [ ] Add inventory
+- [ ] Add new place type "farm"
+  - [ ] Be able to plant seeds
+    - *Have one interaction for everything, but later add tools*
+    - [ ] Update graphic with time
+- [ ] Implement in-game clock
