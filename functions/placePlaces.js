@@ -1,40 +1,50 @@
+//------------vars------------
+const placesTemplate = [
+    {type: "store", colour: "#008800"},
+    {type: "character", colour: "#1100ff"},
+    {type: "farm", colour: "#880000"},
+]
+const placesInteractions = ["storeGUI", "dialogue"]
+
+var places = []
+
+var numPlaces = 0
+var placedPlaces = false
+
+//------------functions------------
 function placePlaces() {
-    i = 0
-    while (i <= 2) {
-        var randPlaceTypeIndex = Math.floor(Math.random() * placesTypes.length)
+    // store
+    places.push({
+        x: 220,
+        y: 240,
+        width: 80,
+        height: 60,
+        type: placesTemplate[0].type,
+        colour: placesTemplate[0].colour,
+    })
+    numPlaces += 1
 
-        var pickedPlaceType = placesTypes[randPlaceTypeIndex]
+    // farm
+    places.push({
+        x: 180,
+        y: 0,
+        width: 320,
+        height: 80,
+        type: placesTemplate[2].type,
+        colour: placesTemplate[2].colour,
+    })
+    numPlaces += 1
 
-        var randX = Math.floor(Math.random() * 500) + 1
-        var randY = Math.floor(Math.random() * 500) + 1
-        var pickedPlaceColour = placesColours[randPlaceTypeIndex]
-        var pickedPlaceInteraction = placesInteractions[randPlaceTypeIndex]
-
-        if (pickedPlaceType == "store") {
-            numPlaces += 1
-            places.push({
-                x: randX,
-                y: randY,
-                width: 30,
-                height: 10,
-                colour: pickedPlaceColour,
-                type: pickedPlaceType,
-                interaction: pickedPlaceInteraction,
-            })
-        } else if (pickedPlaceType == "character") {
-            numPlaces += 1
-            places.push({
-                x: randX,
-                y: randY,
-                width: 30,
-                height: 10,
-                colour: pickedPlaceColour,
-                type: pickedPlaceType,
-                interaction: pickedPlaceInteraction,
-            })
-        }
-        i++
-    }
+    // character
+    places.push({
+        x: 330,
+        y: 90,
+        width: 30,
+        height: 30,
+        type: placesTemplate[1].type,
+        colour: placesTemplate[1].colour,
+    })
+    numPlaces += 1
 
     placedPlaces = true
 }

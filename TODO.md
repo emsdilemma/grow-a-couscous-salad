@@ -8,10 +8,11 @@
 - [x] Create collision popups
 
 **06/11/2026**
+- [x] Add dialogue popups
+- [x] Add inventory
 - [ ] Make shop functional
   - [ ] Be able to buy seeds
-- [ ] Add inventory
-- [ ] Add new place type "farm"
+- [x] Add new place type "farm"
   - [ ] Be able to plant seeds
     - *Have one interaction for everything, but later add tools*
     - [ ] Update graphic with time
