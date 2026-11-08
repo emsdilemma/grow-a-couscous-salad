@@ -31,7 +31,7 @@ const characterGUI = [
 
 //------------functions------------
 function collidedWithCharacter() {
-    if (keys.e) {
+    if (keys.e || (dialogueOpened && keys.escape)) {
         if (!interactionPressed) {
             interactionPressed = true
             dialogueOpened = !dialogueOpened
@@ -40,21 +40,22 @@ function collidedWithCharacter() {
         interactionPressed = false
     }
 
-    if (dialogueOpened) {
-        overlayUI += `
-        <div style="border: 0.5px solid white; margin: 50px;">
-            <div style="
-                border: 2px dashed #350000;
-                background-color: white;
-                color: black;
-                padding: 5px 15%;
-                padding-left: 5px;
-                padding-top: 0;
-            ">
-                <h2>${characterGUI[0].author}</h2>
-                <p>${characterGUI[0].dialogue[1]}</p>
-            </div>
+}
+
+function renderCharacterDialogue() {
+    overlayUI += `
+    <div style="border: 0.5px solid white; margin: 50px;">
+        <div style="
+            border: 2px dashed #350000;
+            background-color: white;
+            color: black;
+            padding: 5px 15%;
+            padding-left: 5px;
+            padding-top: 0;
+        ">
+            <h2>${characterGUI[0].author}</h2>
+            <p>${characterGUI[0].dialogue[1]}</p>
         </div>
-        `
-    }
+    </div>
+    `
 }

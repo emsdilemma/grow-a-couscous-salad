@@ -4,11 +4,12 @@ const placesTemplate = [
     {type: "character", colour: "#1100ff"},
     {type: "farm", colour: "#880000"},
 ]
-const placesInteractions = ["storeGUI", "dialogue"]
 
 var places = []
 
 var numPlaces = 0
+var numFarms = 0
+
 var placedPlaces = false
 
 //------------functions------------
@@ -25,20 +26,30 @@ function placePlaces() {
     numPlaces += 1
 
     // farm
-    places.push({
-        x: 180,
-        y: 0,
-        width: 320,
-        height: 80,
-        type: placesTemplate[2].type,
-        colour: placesTemplate[2].colour,
-    })
+    let farmCurrentY = 0
+    for (i = 1; i <= 3; i++){ // 2 rows
+        let farmCurrentX = 118
+        for (j = 1; j <= 12; j++){ // of 12 columns
+            places.push({
+            x: farmCurrentX,
+            y: farmCurrentY,
+            width: 30,
+            height: 30,
+            type: placesTemplate[2].type,
+            colour: placesTemplate[2].colour,
+            farmId: numFarms,
+            })
+            farmCurrentX += 32
+            numFarms += 1
+        }
+        farmCurrentY += 32
+    }
     numPlaces += 1
 
     // character
     places.push({
-        x: 330,
-        y: 90,
+        x: 342,
+        y: 94,
         width: 30,
         height: 30,
         type: placesTemplate[1].type,

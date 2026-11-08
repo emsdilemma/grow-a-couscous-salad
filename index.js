@@ -3,6 +3,7 @@
 const debugBar = document.getElementById("debugBar")
 var paused = false
 var pauseButtonPressed = false
+var enableDebugVar = false
 
 var pressedI = false
 var inventoryOpen = false
@@ -13,6 +14,7 @@ const ctx = canvas.getContext("2d")
 
 const overlay = document.getElementById("overlay")
 var overlayUI = ""
+var lastOverlayUI = null
 
 // init keyboard
 const keys = {}
@@ -33,32 +35,46 @@ function frameLoop() {
 
 // input listeners
 function pressedKey(event) {
-    keys[event.key] = true
+    keys[event.key.toLowerCase()] = true
 }
 function unPressedKey(event) {
-    keys[event.key] = false
+    keys[event.key.toLowerCase()] = false
 }
 window.addEventListener("keydown", pressedKey)
 window.addEventListener("keyup", unPressedKey)
 
+// enable debug using function
+function enableDebug() {
+    enableDebugVar = true
+}
+
 //------------main loop------------
 function loop() {
-    // clear overlay
+    //------------clear overlay------------
     overlayUI = ""
-    overlay.innerHTML = ""
 
-    // debug
-    //debugBar.textContent = JSON.stringify(places, null, 2)
-    if (keys.p) {
-        if (!pauseButtonPressed) {
-            paused = !paused
-            pauseButtonPressed = true
+    //------------debug------------
+    if (enableDebugVar) {
+        document.getElementById("overlayTestingButton").innerHTML = `
+        <button style="width: 150px; height: 50px; position: absolute; left: 8px;" title="overlay testing">
+            overlay testing (tab + enter)
+        </button>`
+
+        //debugBar.textContent = JSON.stringify(places, null, 2)
+        debugBar.textContent = JSON.stringify(playerInventory, null, 2)
+        //debugBar.textContent = `x,y: ${player.x}, ${player.y}`
+
+        if (keys.p) {
+            if (!pauseButtonPressed) {
+                paused = !paused
+                pauseButtonPressed = true
+            }
+        } else {
+            pauseButtonPressed = false
         }
-    } else {
-        pauseButtonPressed = false
     }
 
-    // keypresses
+    //------------keypressed------------
     if (keys.i) {
         if (!pressedI) {
             inventoryOpen = !inventoryOpen
@@ -68,33 +84,46 @@ function loop() {
         pressedI = false
     }
 
-    if (keys.b) {
+    if (keys.shift) {
         player.speed = 10
-    }
-    else{
+    } else {
         player.speed = 2
     }
 
-    // inventory
-    if (collided) inventoryOpen = false
-    if (inventoryOpen) showInventory()
+    if (keys.f9) enableDebugVar = true
 
-    // do things functions
+    //------------do things functions------------
+    inFarm = false
+
     if (!paused) {
         // place places
         if (!placedPlaces) placePlaces()
-        if (!dialogueOpened) updateMovement()
 
-        // reset collision
-        collided = false
+        // only if any interface is not open
+        if (!dialogueOpened && !storeOpened) updateMovement()
 
         // collisions
+        // reset collision
+        collided = false
         playerCollision()
     }
-    // draw last
-    drawScreen()
-    overlay.innerHTML = overlayUI
 
+    // render outside of collision detector
+    if (storeOpened) renderStore()
+    if (dialogueOpened) renderCharacterDialogue()
+
+    //------------inventory------------
+    if (collided && !inFarm) inventoryOpen = false
+    if (inventoryOpen) showInventory()
+
+    //------------lastly, draw------------
+    drawScreen()
+    if (overlayUI !== lastOverlayUI) {
+        overlay.innerHTML = overlayUI
+        lastOverlayUI = overlayUI
+    }
+
+    //------------loopy loop------------
     frameLoop()
 }
 

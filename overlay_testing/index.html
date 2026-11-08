@@ -1,0 +1,61 @@
+<!doctype html>
+
+<head></head>
+
+<body>
+    <div style="
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            font-family: monospace;
+        ">
+        <div id="overlay" style="
+                display: block;
+                position: absolute;
+                width: 500px;
+                height: 500px;
+                border: 1px solid black;
+            ">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr)">
+                <div>
+                    <div style="display: flex; flex-direction: row;">
+                        <h2 style="margin-top: 5px">${item.item}</h2>
+                        <small style="align-content: end; position: relative; bottom: 10px;">5</small>
+                    </div>
+                    <p style="margin-top: 0;">${item.price}</p>
+                    <button style="background-color: #0cbb00; color: white"
+                        onclick="addToPlayerInventory('${item.item}', 1)">
+                        buy
+                    </button>
+                </div>
+                <div>
+                    <div style="display: flex; flex-direction: row;">
+                        <h2 style="margin-top: 5px">${item.item}</h2>
+                        <small style="align-content: end; position: relative; bottom: 10px;">5</small>
+                    </div>
+                    <p style="margin-top: 0;">${item.price}</p>
+                    <button style="background-color: #0cbb00; color: white"
+                        onclick="addToPlayerInventory('${item.item}', 1)">
+                        buy
+                    </button>
+                </div>
+                <div>
+                    <div style="display: flex; flex-direction: row;">
+                        <h2 style="margin-top: 5px">${item.item}</h2>
+                        <small style="align-content: end; position: relative; bottom: 10px;">5</small>
+                    </div>
+                    <p style="margin-top: 0;">${item.price}</p>
+                    <button style="background-color: #0cbb00; color: white"
+                        onclick="addToPlayerInventory('${item.item}', 1)">
+                        buy
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="/index.html">
+        <button style="width: 150px; height: 50px" title="back to game">
+            back to game
+        </button>
+    </a>
+</body>

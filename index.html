@@ -1,18 +1,33 @@
-<!DOCTYPE html>
-<link rel="stylesheet" type="text/css" href="index.css">
+<!doctype html>
+<link rel="stylesheet" type="text/css" href="index.css" />
+
 <head>
     <title>project couscous</title>
 </head>
+
 <body>
-    <div style="display:flex; justify-content: center; align-content: center; font-family: monospace;">
-        <div id="overlay" style="display: block; position: absolute; width: 500px; height: 500px; border: 1px solid black"></div>
-        <canvas id="gameCanvas" width="500" height="500" style="image-rendering: pixelated;"></canvas>
+    <a href="/overlay_testing/index.html" id="overlayTestingButton"></a>
+    <div style="
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            font-family: monospace;
+        ">
+        <div id="overlay" style="
+                display: block;
+                position: absolute;
+                width: 500px;
+                height: 500px;
+                border: 1px solid black;
+            "></div>
+        <canvas id="gameCanvas" width="500" height="500" style="image-rendering: pixelated"></canvas>
     </div>
     <div id="debugBar"></div>
     <script src="/functions/placePlaces.js"></script>
     <script src="/functions/player.js"></script>
     <script src="/functions/collidedWithStore.js"></script>
     <script src="/functions/collidedWithCharacter.js"></script>
+    <script src="/functions/collidedWithFarm.js"></script>
     <script src="/functions/inventory.js"></script>
 
     <script src="/functions/drawScreen.js"></script>

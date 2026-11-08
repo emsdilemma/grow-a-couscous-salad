@@ -3,19 +3,21 @@
 const player = {
     x: 0,
     y: 0,
-    width: 30,
+    width: 20,
     speed: 2,
     colour: "#ff0000",
     shape: "square",
 }
 
 var collided = false
-var playerInventory = []
+
+var currentPlace = []
+var currentFarmID = 0
 
 //------------functions------------
 function playerCollision() {
     for (let i = 0; i < places.length; i++) {
-        let currentPlace = places[i]
+        currentPlace = places[i]
         if (
             player.x + player.width >= currentPlace.x &&
             player.x <= currentPlace.x + currentPlace.width &&
@@ -34,7 +36,7 @@ function playerCollision() {
                         top: ${player.y-35}px;
                         color: white;
                     ">
-                        <p>press e to interact</p>
+                        <p>press e to open store</p>
                     </div>`
                 }
                 //debugBar.textcontext = `collided with store! (${currentPlace.colour})`
@@ -49,24 +51,15 @@ function playerCollision() {
                         top: ${player.y-35}px;
                         color: white;
                     ">
-                        <p>press e to interact</p>
+                        <p>press e to talk</p>
                     </div>`
                 }
                 //debugBar.textcontext = `collided with character! (${currentPlace.colour})`
+            } else if (currentPlace.type == "farm") {
+                currentFarmID = currentPlace.farmId
+                collidedWithFarm()
             }
             return
         }
-    }
-}
-
-function addToPlayerInventory(itemToAdd, quantityToAdd) {
-    const targetItem = playerInventory.find(product => product.item == itemToAdd)
-    if (targetItem) {
-        targetItem.quantity += quantityToAdd
-    }
-    else {
-        playerInventory.push(
-            {item: itemToAdd, quantity: quantityToAdd}
-        )
     }
 }
