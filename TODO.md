@@ -15,5 +15,12 @@
 - [x] Add new place type "farm"
   - [x] Be able to plant seeds
     - *Have one interaction for everything, but later add tools*
-    - [ ] Update graphic with time
+    - [x] Update graphic with time
 - [ ] Implement in-game clock
+
+**08/11/2026**
+- [ ] Add using items
+  - [ ] Create "hand" slot and display
+- [ ] Make character dialogue helpful
+- [ ] Make store update
+  - [ ] Add graphic to show new stock

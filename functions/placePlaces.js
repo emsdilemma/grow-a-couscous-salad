@@ -38,6 +38,8 @@ function placePlaces() {
             type: placesTemplate[2].type,
             colour: placesTemplate[2].colour,
             farmId: numFarms,
+            plantedTime: null,
+            growStage: 0,
             })
             farmCurrentX += 32
             numFarms += 1

@@ -48,6 +48,9 @@ function enableDebug() {
     enableDebugVar = true
 }
 
+//------------tick clock------------
+clock = setInterval(countTime, 1000)
+
 //------------main loop------------
 function loop() {
     //------------clear overlay------------
@@ -60,9 +63,10 @@ function loop() {
             overlay testing (tab + enter)
         </button>`
 
-        //debugBar.textContent = JSON.stringify(places, null, 2)
-        debugBar.textContent = JSON.stringify(playerInventory, null, 2)
+        debugBar.textContent = JSON.stringify(places, null, 2)
+        //debugBar.textContent = JSON.stringify(playerInventory, null, 2)
         //debugBar.textContent = `x,y: ${player.x}, ${player.y}`
+        //debugBar.textContent = `d:h:m ${day}:${hour}:${formattedMinute}`
 
         if (keys.p) {
             if (!pauseButtonPressed) {
@@ -106,6 +110,9 @@ function loop() {
         // reset collision
         collided = false
         playerCollision()
+
+        // grow farms
+        growFarms()
     }
 
     // render outside of collision detector

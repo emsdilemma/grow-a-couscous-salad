@@ -6,9 +6,12 @@ var inFarm = false
 function collidedWithFarm() {
     inFarm = true
     if (keys.e) {
-        if (!planted) {
+        if (!planted && currentPlace.plantedTime === null) {
             planted = true
-            currentPlace.colour = "#a2ff63"
+
+            currentPlace.plantedTime = [day, hour, minute]
+            currentPlace.growStage = 0
+            currentPlace.colour = growStageColours[currentPlace.growStage]
         }
     }
     else {
