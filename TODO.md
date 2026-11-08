@@ -16,7 +16,7 @@
   - [x] Be able to plant seeds
     - *Have one interaction for everything, but later add tools*
     - [x] Update graphic with time
-- [ ] Implement in-game clock
+- [x] Implement in-game clock
 
 **08/11/2026**
 - [ ] Add using items
