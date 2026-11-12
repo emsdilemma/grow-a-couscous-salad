@@ -1,15 +1,17 @@
 //------------vars------------
 var interactionPressed = false
 var dialogueOpened = false
+var selectedDialogueOption = 0
 
 // init GUI
 const characterGUI = [
     {
-        author: "1mma",
+        author: "emma",
         dialogue: [
-            `List'ning their fear, I could not say “Amen,” When they did say “God bless us!”`,
-            `second dialogue`,
-            `third dialogue`,
+            `Press e inside the clock tower to see what time it is!
+            <br/><br/>
+            It can help you plan your crops and track how long they've been growing.`,
+            `The store regularly restocks. Make sure to check it from time to time for new crops to grow!`,
         ],
     },
     {
@@ -35,14 +37,20 @@ function collidedWithCharacter() {
         if (!interactionPressed) {
             interactionPressed = true
             dialogueOpened = !dialogueOpened
+            if (dialogueOpened) {
+                selectedDialogueOption = Math.floor(
+                    Math.random() * characterGUI[0].dialogue.length
+                )
+            }
         }
-    } else {
+    }
+    else {
         interactionPressed = false
     }
 
 }
 
-function renderCharacterDialogue() {
+function renderCharacterDialogue(dialogueOption) {
     overlayUI += `
     <div style="border: 0.5px solid white; margin: 50px;">
         <div style="
@@ -54,7 +62,7 @@ function renderCharacterDialogue() {
             padding-top: 0;
         ">
             <h2>${characterGUI[0].author}</h2>
-            <p>${characterGUI[0].dialogue[1]}</p>
+            <p>${characterGUI[0].dialogue[dialogueOption]}</p>
         </div>
     </div>
     `

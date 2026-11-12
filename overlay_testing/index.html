@@ -16,41 +16,14 @@
                 height: 500px;
                 border: 1px solid black;
             ">
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr)">
-                <div>
-                    <div style="display: flex; flex-direction: row;">
-                        <h2 style="margin-top: 5px">${item.item}</h2>
-                        <small style="align-content: end; position: relative; bottom: 10px;">5</small>
-                    </div>
-                    <p style="margin-top: 0;">${item.price}</p>
-                    <button style="background-color: #0cbb00; color: white"
-                        onclick="addToPlayerInventory('${item.item}', 1)">
-                        buy
-                    </button>
-                </div>
-                <div>
-                    <div style="display: flex; flex-direction: row;">
-                        <h2 style="margin-top: 5px">${item.item}</h2>
-                        <small style="align-content: end; position: relative; bottom: 10px;">5</small>
-                    </div>
-                    <p style="margin-top: 0;">${item.price}</p>
-                    <button style="background-color: #0cbb00; color: white"
-                        onclick="addToPlayerInventory('${item.item}', 1)">
-                        buy
-                    </button>
-                </div>
-                <div>
-                    <div style="display: flex; flex-direction: row;">
-                        <h2 style="margin-top: 5px">${item.item}</h2>
-                        <small style="align-content: end; position: relative; bottom: 10px;">5</small>
-                    </div>
-                    <p style="margin-top: 0;">${item.price}</p>
-                    <button style="background-color: #0cbb00; color: white"
-                        onclick="addToPlayerInventory('${item.item}', 1)">
-                        buy
-                    </button>
-                </div>
-            </div>
+            <p style="
+                position: absolute;
+                left: 50px;
+                top: 50px;
+                color: black;
+                ">
+                ${currentItemHeld.item}
+            </p>
         </div>
     </div>
     <a href="/index.html">

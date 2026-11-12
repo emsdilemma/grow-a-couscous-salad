@@ -1,5 +1,5 @@
 //------------vars------------
-var baseTime = 0
+var stockedNotif = false
 
 //------------functions------------
 function drawScreen() {
@@ -10,7 +10,7 @@ function drawScreen() {
     ctx.fillStyle = "#222222"
     ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-    // draw all places
+    // draw places BEHIND player
     for (let i = 0; i < places.length; i++) {
         currentPlace = places[i]
         ctx.fillStyle = currentPlace.colour
@@ -22,30 +22,77 @@ function drawScreen() {
         )
     }
 
+    let store = places.find((place) => place.type === "store")
+    
+    if (storeStocked && !stockedNotif) {
+        stockedNotif = true
+    }
+    if (stockedNotif && storeOpened) {
+        stockedNotif = false
+    }
+    
+    if (stockedNotif) {
+        ctx.fillStyle = "#cc00bb"
+        ctx.fillRect(
+            store.x + store.width - 20,
+            store.y + store.height - 20,
+            20,
+            20
+        )
+    }
+
     // draw player
     ctx.fillStyle = player.colour
     ctx.fillRect(player.x, player.y, player.width, player.width)
 
+    // draw places IN FRONT of player
 
-    // draw clock
-    ctx.beginPath()
-    ctx.arc(35, 35, 30, 0, 2*Math.PI)
-    ctx.strokeStyle = "white"
-    ctx.stroke()
+    if (readClockTower && collided) {
+        let clockCentreX = 250
+        let clockCentreY = 250
 
-    // draw hand
-    clockHandAngle = baseTime % 360 - 90
+        // draw clock
+        ctx.beginPath()
+        ctx.arc(clockCentreX, clockCentreY, 200, 0, 2 * Math.PI)
+        ctx.strokeStyle = "white"
+        ctx.lineWidth = 10
+        ctx.stroke()
+        ctx.fillStyle = "#414f4f"
+        ctx.fill()
 
-    ctx.save()
-    ctx.translate(35, 35)
-    ctx.rotate(clockHandAngle * Math.PI / 180)
-    ctx.fillStyle = "#ffff48"
-    ctx.fillRect(-3, -2.5, 30, 5)
-    ctx.restore()
+        // draw notches
+        ctx.lineWidth = 5
+        ctx.strokeStyle = "white"
+        ctx.beginPath()
 
-    // draw pin
-    ctx.beginPath()
-    ctx.arc(35, 35, 2, 0, 2*Math.PI)
-    ctx.fillStyle = "black"
-    ctx.fill()
+        // U and R
+        ctx.moveTo(250, 50)
+        ctx.lineTo(250, 100)
+        ctx.moveTo(450, 250)
+        ctx.lineTo(400, 250)
+
+        // D and L
+        ctx.moveTo(250, 450)
+        ctx.lineTo(250, 400)
+        ctx.moveTo(50, 250)
+        ctx.lineTo(100, 250)
+
+        ctx.stroke()
+
+        // draw hand
+        clockHandAngle = (baseTime % 360) - 90
+
+        ctx.save()
+        ctx.translate(clockCentreX, clockCentreY)
+        ctx.rotate((clockHandAngle * Math.PI) / 180)
+        ctx.fillStyle = "#ffff48"
+        ctx.fillRect(-3, -2.5, 180, 5)
+        ctx.restore()
+
+        // draw pin
+        ctx.beginPath()
+        ctx.arc(clockCentreX, clockCentreY, 2, 0, 2 * Math.PI)
+        ctx.fillStyle = "black"
+        ctx.fill()
+    }
 }

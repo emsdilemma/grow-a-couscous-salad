@@ -2,12 +2,17 @@
 var interactionPressed = false
 var storeOpened = false
 
+var productIds = 0
+
+var storeStocked = false
+
 // init GUI
 const storeGUI = [
-    { item: "potatoes", price: 0.86, quantity: 5},
-    { item: "pepper seeds", price: 2.50, quantity: 2},
-    { item: "persimmon seeds", price: 4.86, quantity: 4},
-    { item: "carrots", price: 1.20, quantity: 1},
+
+]
+
+const storeItems = [
+    "potatoes", "pepper seeds", "persimmon seeds", "carrots"
 ]
 
 //------------functions------------
@@ -60,14 +65,13 @@ function getAllItems(item) {
                 <p style="margin-top: 0;">₼${parseFloat(item.price).toFixed(2)}</p>
                 <button
                     style="background-color: #0cbb00; color: white"
-                    onclick="addToPlayerInventory('${item.item}', ${item.quantity})"
+                    onclick="addToPlayerInventory('${item.item}', ${item.quantity}, ${item.productId})"
                 >
                     buy
                 </button>
             </div>
         `
-    }
-    else {
+    } else {
         return `
             <div style="display: grid; grid-template-rows: subgrid; grid-row: span 3">
                 <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin-bottom: 10px;">
@@ -82,5 +86,44 @@ function getAllItems(item) {
                 </button>
             </div>
         `
+    }
+}
+
+function stockStore() {
+    for (let i = 0; i < storeGUI.length; i++) {
+        if (storeGUI[i].item.length === 0) {
+            storeEmptyShelves++
+        }
+    }
+
+    var probabilityStockStore = Math.random()
+    emptyIndex = storeGUI.findIndex(product => product.item === "")
+    if ((probabilityStockStore <= 0.02 && emptyIndex >= 0)) {
+        storeGUI.splice(emptyIndex, 1)
+        
+        storeGUI.splice(emptyIndex, 0, {
+            item: storeItems[Math.floor(Math.random() * storeItems.length)],
+            price: Math.floor(Math.random() * 500) / 100,
+            quantity: Math.floor(Math.random() * 9) + 1,
+            productId: productIds
+        })
+        productIds++
+
+        storeStocked = true
+    }
+    else if (storeGUI.length <= 5 && probabilityStockStore <= 0.3){
+        storeGUI.push({
+            item: storeItems[Math.floor(Math.random() * storeItems.length)],
+            price: Math.floor(Math.random() * 500) / 100,
+            quantity: Math.floor(Math.random() * 9) + 1,
+            productId: productIds
+        })
+        productIds++
+
+        storeStocked = true
+    }
+    else {
+        emptyIndex = -1
+        storeStocked = false
     }
 }

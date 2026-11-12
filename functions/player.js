@@ -25,7 +25,7 @@ function playerCollision() {
             player.y <= currentPlace.y + currentPlace.height
         ) {
             collided = true
-            if (currentPlace.type == "store") {
+            if (currentPlace.type === "store") {
                 collidedWithStore()
                 if (!storeOpened){
                     overlayUI += `
@@ -40,7 +40,7 @@ function playerCollision() {
                     </div>`
                 }
                 //debugBar.textcontext = `collided with store! (${currentPlace.colour})`
-            } else if (currentPlace.type == "character") {
+            } else if (currentPlace.type === "character") {
                 collidedWithCharacter()
                 if (!dialogueOpened){
                     overlayUI += `
@@ -55,9 +55,12 @@ function playerCollision() {
                     </div>`
                 }
                 //debugBar.textcontext = `collided with character! (${currentPlace.colour})`
-            } else if (currentPlace.type == "farm") {
+            } else if (currentPlace.type === "farm") {
                 currentFarmID = currentPlace.farmId
                 collidedWithFarm()
+            }
+            else if (currentPlace.type === "clockTower") {
+                collidedWithClockTower()
             }
             return
         }

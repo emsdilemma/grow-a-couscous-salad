@@ -3,6 +3,7 @@
 **03/11/2026**
 - [x] Make basic background with "places"
   ~~- [ ] Could be all svgs?~~
+  - [x] Make all places use placeholder rects
   - [x] Used randomly generated squares
 - [x] Make character movement
 - [x] Create collision popups
@@ -19,8 +20,25 @@
 - [x] Implement in-game clock
 
 **08/11/2026**
-- [ ] Add using items
-  - [ ] Create "hand" slot and display
-- [ ] Make character dialogue helpful
-- [ ] Make store update
-  - [ ] Add graphic to show new stock
+- [x] Clock tower
+- [x] Add random variance to growth
+- [x] Add using items
+  - [x] Have "rolling" hotbar selection - reserve 1 or ` = "hand" item
+  - [x] Create "hand" slot and display
+  - [x] Change growth state to be alpha channels
+  - [x] Add planting different crops
+  - [x] Add seeds decreasing as planted; hand slot to move back
+- [x] Make character dialogue helpful
+- [x] Make store restock
+  - [x] Add graphic to show update
+
+**12/11/2026**
+- [ ] Add different parts of the village/travel
+
+
+**PLANNED**
+- [ ] Cross-pollinating
+- [ ] Cross-breeding
+- [ ] Cultivars
+- [ ] Genes
+- [ ] Simulate reproduction

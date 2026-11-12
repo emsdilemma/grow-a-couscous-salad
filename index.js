@@ -8,6 +8,8 @@ var enableDebugVar = false
 var pressedI = false
 var inventoryOpen = false
 
+var fadeHeldDisplay = false
+
 // init canvas
 const canvas = document.getElementById("gameCanvas")
 const ctx = canvas.getContext("2d")
@@ -18,6 +20,9 @@ var lastOverlayUI = null
 
 // init keyboard
 const keys = {}
+
+// init time
+var lastTime = 0
 
 //------------functions------------
 function updateMovement() {
@@ -63,8 +68,8 @@ function loop() {
             overlay testing (tab + enter)
         </button>`
 
-        debugBar.textContent = JSON.stringify(places, null, 2)
-        //debugBar.textContent = JSON.stringify(playerInventory, null, 2)
+        //debugBar.textContent = JSON.stringify(places)
+        debugBar.textContent = JSON.stringify(playerInventory)
         //debugBar.textContent = `x,y: ${player.x}, ${player.y}`
         //debugBar.textContent = `d:h:m ${day}:${hour}:${formattedMinute}`
 
@@ -104,20 +109,33 @@ function loop() {
         if (!placedPlaces) placePlaces()
 
         // only if any interface is not open
-        if (!dialogueOpened && !storeOpened) updateMovement()
+        if (!dialogueOpened && !storeOpened && !readClockTower) {
+            updateMovement()
+            fadeHeldDisplay = false
+        }
+        else {
+            fadeHeldDisplay = true
+        }
 
         // collisions
         // reset collision
         collided = false
         playerCollision()
 
-        // grow farms
-        growFarms()
+        holdItem()
+        displayHeldItem()
+
+        if (lastTime != baseTime) { // these run on game clock
+            lastTime = baseTime
+            //console.log("run game clock", baseTime)
+            growFarms()
+            stockStore()
+        }
     }
 
     // render outside of collision detector
     if (storeOpened) renderStore()
-    if (dialogueOpened) renderCharacterDialogue()
+    if (dialogueOpened) renderCharacterDialogue(selectedDialogueOption)
 
     //------------inventory------------
     if (collided && !inFarm) inventoryOpen = false
